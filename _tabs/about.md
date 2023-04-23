@@ -45,9 +45,9 @@ Link:
 -->
 
 ## Contact
-You can contact me at [sskartheekadivi@gmail.com](mailto:sskartheekadivi@gmail.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/sskartheekadivi) or [Twitter](https://twitter.com/sskartheekadivi).
+You can contact me at [sskartheek.adivi@outlook.com](mailto:sskartheek.adivi@outlook.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/sskartheekadivi) or [Twitter](https://twitter.com/sskartheekadivi).
 
 ---
 
-Thank you for visiting my portfolio! If you have any questions or would like to collaborate on a project, please feel free to [contact me](mailto:sskartheekadivi@gmail.com).
+Thank you for visiting my portfolio! If you have any questions or would like to collaborate on a project, please feel free to [contact me](mailto:sskartheek.adivi@outlook.com).
 
