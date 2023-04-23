@@ -2,7 +2,7 @@
 title: Linux distributions for Embedded Systems
 date: 2023-04-23 +0530
 categories: [Embedded Systems, Linux]
-tags: [linux-distributions, embedded-systems]
+tags: [linux-distribution, embedded-system, getting-started-guide]
 comments: true
 ---
 
