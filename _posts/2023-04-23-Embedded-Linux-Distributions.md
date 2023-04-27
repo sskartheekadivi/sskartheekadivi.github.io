@@ -1,8 +1,11 @@
 ---
-title: Linux distributions for Embedded Systems
+title: Embedded Linux Distributions
 date: 2023-04-23 +0530
 categories: [Embedded Systems, Linux]
-tags: [linux-distribution, embedded-system, getting-started-guide]
+tags: [linux distributions, embedded systems, getting started guide]
+image:
+  path: /assets/img/posts/Embedded-Linux-Distributions/Embedded-Linux-Distributions.png
+  alt: Embedded Linux Distributions
 comments: true
 ---
 
@@ -37,3 +40,4 @@ Debian is a popular and versatile Linux distribution known for its stability, re
 
 ## Conclusion
 Linux distributions have become increasingly popular for embedded systems due to their open source nature, flexibility, and customizability. The distributions listed above are just a few of the many options available for embedded systems. When choosing a Linux distribution for an embedded system, developers should consider their specific requirements and choose a distribution that meets those needs. Additionally, it's important to choose a distribution with a large and active community of developers and users, as this can help ensure ongoing development and support.
+
