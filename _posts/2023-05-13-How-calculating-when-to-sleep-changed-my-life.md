@@ -1,6 +1,6 @@
 ---
 title: How calculating when to sleep changed my life
-date: 2023-04-23 +0530
+date: 2023-05-13 +0530
 categories: [Well-being, Sleep]
 tags: [well-being, sleep, heavy sleeper, sleep calculator, alarms, productivity]
 image:
@@ -21,9 +21,9 @@ The problem with heavy sleepers like me is that we often wake up in the middle o
 To calculate when to go to bed and when to wake up based on our sleep cycles, I used a simple formula: multiply 90 minutes by the number of sleep cycles you want to complete (usually 4 to 6), and then add 15 minutes for the time it takes to fall asleep. For example, if I want to wake up at 5:30 am and complete 4 sleep cycles, I should go to bed at 11:15 pm.
 
 ```math
-    5:30 am -----> wakeup time
-  - 6:00    -----> 4 x 90 mins cycles
-  - 0:15    -----> time to fall asleep
+    05:30 am -----> wakeup time
+  - 06:00    -----> 4 x 90 mins cycles
+  - 00:15    -----> time to fall asleep
   ----------
   = 11:15 pm
 ```
