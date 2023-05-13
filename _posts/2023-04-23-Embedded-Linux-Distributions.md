@@ -4,7 +4,7 @@ date: 2023-04-23 +0530
 categories: [Embedded Systems, Linux]
 tags: [linux distributions, embedded systems, getting started guide]
 image:
-  path: /assets/img/posts/Embedded-Linux-Distributions/Embedded-Linux-Distributions.png
+  path: /assets/img/posts/Embedded-Linux-Distributions.png
   alt: Embedded Linux Distributions
 comments: true
 ---
