@@ -20,10 +20,10 @@ timezone: Asia/Kolkata
 
 title: S S Kartheek Adivi # the main title
 
-tagline: Personal portfolio and blogging site # it will display as the sub-title
+tagline: Happy Soul in & as an Embedded Software Engineer
 
 description: >- # used by seo meta and the atom feed
-  Portfolio and Blogging website built to showcase the work I do.
+  Portfolio and Blogging website. An ambivert & happy soul in & as an embedded software engineer based in Bengaluru.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: "https://sskartheekadivi.github.io"
