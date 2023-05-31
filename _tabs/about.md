@@ -8,6 +8,14 @@ toc: true
 
 # Introduction
 Hello there, I'm Kartheek. An ambivert & happy soul in & as an embedded software engineer based in Bengaluru.
+I'm from Kakinada, Andhra Pradesh. A coastal area with finger-licking spicy food and super hot summers.
+
+I love listening to music, going on bike rides and talking to people. So I'm trying to learn music, repair my bike and becoming an extrovert.
+I cook and I like my food. (That doesn't mean it tastes good. &#128540;)
+
+I believe in manifestation and positive thinking (despite the fact that I do get negative thoughts). I live by simple principles such as..
+* Smile and let smile
+* Do it coz you like it
 
 > I was an introvert throughout my childhood and has been an ambivert ever since I started working. It was a fun transition.
 {: .prompt-tip }
@@ -20,7 +28,8 @@ Throughout my career, I have gained expertise in Firmware and Driver development
 
 # Skills
 * C, C++
-* Yocto
+* OpenEmbedded Yocto - Bitbake
+* Qt QML
 * Debian Packaging
 * Bash, Perl
 * Python
@@ -33,12 +42,19 @@ On it &#128587;.
 
 # Experience
 + ## Software Engineer, Texas Instruments (March 2022 - Present)
-    * ### Linux SDK for SITARA MPU
-        - [WIP]
+    * ### Linux SDK for SITARA MPU (AM6x family SoCs)
+        - Defining the SDK and OOB experience
+        - Yocto layer maintenance and contribution
+	        + meta-processor-sdk
+	        + meta-arago
+	        + meta-ti
+        - Build Scripts
+        - Test Plan
     * ### QT5 GUI apps
-        - [WIP]
-    * ### Debian
-        - [WIP]
+        - Edge AI Gallery
+    * ### Debian for SITARA MPU and Jacinto
+        - Debian Build Scripts
+        - TI Debian package maintenance
 
 + ## Embedded Software Engineer, SoCtronics Technologies (Nov 2019 - March 2022)
     * ### Automobile DCU (FPGA)
