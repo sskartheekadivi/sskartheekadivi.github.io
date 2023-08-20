@@ -13,31 +13,33 @@ I'm from Kakinada, Andhra Pradesh. A coastal area with finger-licking spicy food
 I love listening to music, going on bike rides and talking to people. So I'm trying to learn music, repair my bike and becoming an extrovert.
 I cook and I like my food. (That doesn't mean it tastes good. &#128540;)
 
-I believe in manifestation and positive thinking (despite the fact that I do get negative thoughts). I live by simple principles such as..
+I believe in manifestation and positive thinking (despite the fact that I do get negative thoughts). I live by the following simple principles ..
 * Smile and let smile
 * Do it coz you like it
+* Less is more
 
 > I was an introvert throughout my childhood and has been an ambivert ever since I started working. It was a fun transition.
 {: .prompt-tip }
 
 # Background
-Throughout my career, I have gained expertise in Firmware and Driver development, BootROM, Yocto and have experience working with a variety of tools and technologies, including FreeRTOS, Linux Kernel, OpemEmbedded Yocto Project. I am always eager to learn and try something new stepping out of my comfort zone.
+Throughout my career, I have gained expertise in Firmware and Driver development, BootROM, Yocto and have experience working with a variety of tools and technologies, including FreeRTOS, Linux Kernel, OpemEmbedded Yocto Project and Debian. I am always eager to learn and try something new stepping out of my comfort zone.
 
 > Despite the fact that I just did my 3 year Diploma (Polytechnic) by the time I started my Career, I have always believed that I can become what I am now without an actual Degree.
 {: .prompt-info}
 
 # Skills
 * C, C++
-* OpenEmbedded Yocto - Bitbake
-* Qt QML
-* Debian Packaging
-* Bash, Perl
-* Python
-* Rust (Beginner)
+* OpenEmbedded/Yocto - Bitbake
 * RTOS and Linux OS Concepts
 * Device Driver Development
+* Debian Packaging
+* Qt QML
+* Python
+* Rust (Beginner)
+* Bash, Perl
 
 # Projects
+
 On it &#128587;.
 
 # Experience
@@ -45,16 +47,21 @@ On it &#128587;.
     * ### Linux SDK for SITARA MPU (AM6x family SoCs)
         - Defining the SDK and OOB experience
         - Yocto layer maintenance and contribution
-	        + meta-processor-sdk
-	        + meta-arago
-	        + meta-ti
-        - Build Scripts
+	        + [meta-processor-sdk](https://git.ti.com/cgit/processor-sdk/meta-processor-sdk/) - Processor SDK layer for TI Sitara MPU Linux SDKs.
+	        + [meta-arago](https://git.yoctoproject.org/meta-arago) - The official OpenEmbedded/Yocto BSP layer for Arago Filesystem.
+	        + [meta-ti](https://git.yoctoproject.org/meta-ti) - The official OpenEmbedded/Yocto BSP layer for Texas Instruments platforms.
         - Test Plan
     * ### QT5 GUI apps
-        - Edge AI Gallery
+        - [EdgeAI Gallery](https://git.ti.com/cgit/apps/edgeai-gui-app)
+            + Default OOB experience for TI analytics platforms
+            + Modular design to tailor the experience for each platform
+        - [TI Apps Launcher](https://github.com/sskartheekadivi/ti-apps-launcher)
+            + Default OOB experience for Yocto on TI platforms
     * ### Debian for SITARA MPU and Jacinto
         - Debian Build Scripts
         - TI Debian package maintenance
+    * ### Jenkins
+        - Builds setup and maintainance
 
 + ## Embedded Software Engineer, SoCtronics Technologies (Nov 2019 - March 2022)
     * ### Automobile DCU (FPGA)
