@@ -6,6 +6,7 @@ import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Giscus from '../../components/Giscus.astro';
 
 interface Props {
 	entry: CollectionEntry<'work'>;
@@ -51,6 +52,9 @@ const { Content } = await render(entry);
 				</div>
 			</main>
 		</div>
+    <div class="wrapper">
+      <Giscus />
+    </div>
 		<ContactCTA />
 	</div>
 </BaseLayout>
