@@ -6,18 +6,17 @@ import ThemeToggle from './ThemeToggle.astro';
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
 	{ label: 'Home', href: '/' },
-	{ label: 'Work', href: '/work/' },
+	{ label: 'Blogs', href: '/blogs/' },
+	{ label: 'Projects', href: '/projects/' },
 	{ label: 'About', href: '/about/' },
 ];
 
 /** Icon links to social media — edit these with links to your profiles! */
 const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
-	{ label: 'Twitter', href: 'https://twitter.com/me', icon: 'twitter-logo' },
-	{ label: 'Twitch', href: 'https://twitch.tv/me', icon: 'twitch-logo' },
-	{ label: 'GitHub', href: 'https://github.com/me', icon: 'github-logo' },
-	{ label: 'CodePen', href: 'https://codepen.io/me', icon: 'codepen-logo' },
-	{ label: 'dribbble', href: 'https://dribbble.com/me', icon: 'dribbble-logo' },
-	{ label: 'YouTube', href: 'https://www.youtube.com/@me/', icon: 'youtube-logo' },
+	{ label: 'Twitter', href: 'https://twitter.com/sskartheekadivi', icon: 'twitter-logo' },
+	{ label: 'GitHub', href: 'https://github.com/sskartheekadivi', icon: 'github-logo' },
+	{ label: 'GitLab', href: 'https://gitlab.com/sskartheekadivi', icon: 'gitlab-logo' },
+	{ label: 'YouTube', href: 'https://www.youtube.com/@sskartheekadivi/', icon: 'youtube-logo' },
 ];
 
 /** Test if a link is pointing to the current page. */
