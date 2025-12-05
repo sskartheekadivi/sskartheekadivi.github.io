@@ -1,0 +1,94 @@
+---
+// src/pages/index.astro
+// This is a standalone page with no navigation bar
+import Icon from '../components/Icon.astro';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Coming Soon | Kartheek</title>
+		
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+            <div class="icon-wrapper">
+			    <Icon icon="terminal-window" size="4rem" gradient />
+            </div>
+
+			<h1>Work in Progress</h1>
+			<p>I am currently building my portfolio. Check back soon!</p>
+            
+            <div class="links">
+                <a href="https://github.com/sskartheekadivi" target="_blank">GitHub</a>
+                <span class="separator">|</span>
+                <a href="https://www.linkedin.com/in/sskartheekadivi" target="_blank">LinkedIn</a>
+            </div>
+		</div>
+	</body>
+</html>
+
+<style>
+    /* Simple Dark Theme Styles for this page only */
+	body {
+		background-color: #141925; /* Dark background */
+		color: #e3e6ee; /* Light text */
+		font-family: 'Public Sans', system-ui, sans-serif;
+		height: 100vh;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
+
+    .container {
+        padding: 2rem;
+        max-width: 600px;
+    }
+
+    .icon-wrapper {
+        color: #a78bfa; /* Light purple */
+        margin-bottom: 1.5rem;
+        display: inline-block;
+    }
+
+	h1 {
+		font-size: 2.5rem;
+		margin: 0 0 1rem 0;
+        font-family: 'Rubik', sans-serif;
+	}
+
+	p {
+		font-size: 1.2rem;
+		color: #aeb4c6; /* Muted text */
+		line-height: 1.5;
+        margin-bottom: 2rem;
+	}
+
+    .links {
+        margin-top: 2rem;
+    }
+
+    a {
+        color: #c084fc; /* Accent color */
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.2s;
+    }
+
+    a:hover {
+        color: #d8b4fe;
+        text-decoration: underline;
+    }
+
+    .separator {
+        margin: 0 1rem;
+        color: #4b5563;
+    }
+</style>

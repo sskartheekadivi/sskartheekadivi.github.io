@@ -1,119 +1,462 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import Hero from '../components/Hero.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import Icon from '../components/Icon.astro';
+
+const resumeEntries = await getCollection('resume');
+const resumeEntry = resumeEntries[0];
+const { data: resume } = resumeEntry;
+const { Content } = await resumeEntry.render();
+
+const orderedSections = [
+  { id: 'summary', title: 'Summary', data: null, component: Content },
+  { id: 'skills', title: 'Technical Skills', data: resume.skills },
+  { id: 'experience', title: 'Experience', data: resume.experience },
+  { id: 'education', title: 'Education', data: resume.education },
+  { id: 'certifications', title: 'Certifications', data: resume.certifications },
+  { id: 'talks', title: 'Talks', data: resume.talks },
+  { id: 'awards', title: 'Awards & Recognitions', data: resume.awards },
+];
 ---
 
-<BaseLayout title="About | Jeanine White" description="About Jeanine White Lorem Ipsum">
-	<div class="stack gap-20">
-		<main class="wrapper about">
-			<Hero
-				title="About"
-				tagline="Thanks for stopping by. Read below to learn more about myself and my background."
-			>
-				<img
-					width="1553"
-					height="873"
-					src="/assets/at-work.jpg"
-					alt="Jeanine White at work with a colleague"
-				/>
-			</Hero>
+<BaseLayout
+  title="About | Sai Sree Kartheek Adivi"
+  description="Learn more about Sai Sree Kartheek Adivi, an Embedded Software Engineer and Linux Kernel Developer."
+>
+  <div class="stack gap-20">
+    <div class="wrapper">
+        <header class="hero-layout">
+            <Hero
+                title="About Me"
+                tagline={resume.tagline}
+                align="start"
+            >
+                <div class="roles">
+                    <a href="/resume.pdf" target="_blank" class="download-pill" aria-label="Download Resume as PDF">
+                        <Icon icon="pdf" size="1.33em" /> Download PDF
+                    </a>
+                </div>
+            </Hero>
+            <img
+                width="480"
+                height="620"
+                src="/assets/portrait.jpg"
+                alt="A portrait of Kartheek Adivi, standing outdoors."
+                class="hero-image"
+            />
+        </header>
+    </div>
 
-			<section>
-				<h2 class="section-title">Background</h2>
-				<div class="content">
-					<p>
-						Lorem ipsum dolor sit amet, <a href="https://astro.build/">Astro</a> makes people happy.
-						Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum
-						id venenatis a condimentum vitae. Dapibus ultrices in iaculis nunc. Arcu odio ut sem nulla
-						pharetra diam sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare.
-					</p>
-					<p>
-						Arcu dui vivamus arcu felis bibendum ut tristique et egestas. Eget gravida cum sociis
-						natoque penatibus. Cras fermentum odio eu feugiat pretium nibh. Proin nibh nisl
-						condimentum id venenatis. Porta nibh venenatis cras sed felis eget velit. Id diam vel
-						quam elementum pulvinar etiam non.
-					</p>
-					<p>
-						Ultrices tincidunt arcu non sodales neque sodales ut. Sed enim ut sem viverra aliquet
-						eget sit amet. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra.
-						Viverra accumsan in nisl nisi scelerisque eu ultrices. In massa tempor nec feugiat nisl
-						pretium fusce.
-					</p>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Education</h2>
-				<div class="content">
-					<p>Corporis voluptates tenetur laudantium.</p>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Skills</h2>
-				<div class="content">
-					<p>officia unde omnis</p>
-				</div>
-			</section>
-		</main>
+    <main class="wrapper">
+      <div class="about-content">
+        {orderedSections.map(section => {
+          if (!section.data && !section.component) return null;
+          if (Array.isArray(section.data) && section.data.length === 0) return null;
 
-		<ContactCTA />
-	</div>
+          return (
+            <section id={section.id} class="content-section">
+              <h2 class="section-title">{section.title}</h2>
+              <div class="section-content">
+                {section.id === 'summary' && <section.component />}
+                
+                {section.id === 'skills' && (
+                  <div class="skills-grid">
+                    <div class="skill-category">
+                      <h4>Languages</h4>
+                      <ul>{section.data.languages.map(skill => <li>{skill}</li>)}</ul>
+                    </div>
+                    <div class="skill-category">
+                      <h4>Embedded & Kernel</h4>
+                      <ul>{section.data.embedded.map(skill => <li>{skill}</li>)}</ul>
+                    </div>
+                    <div class="skill-category">
+                      <h4>Hardware</h4>
+                      <ul>{section.data.hardware.map(skill => <li>{skill}</li>)}</ul>
+                    </div>
+                    <div class="skill-category">
+                      <h4>Tools & Build Systems</h4>
+                      <ul>{section.data.tools.map(skill => <li>{skill}</li>)}</ul>
+                    </div>
+                  </div>
+                )}
+
+                {section.id === 'experience' && (
+                  <div class="timeline-list">
+                    {section.data.map(job => (
+                      <div class="timeline-item">
+                        <div class="timeline-header">
+                          <h3>{job.role}</h3>
+                          <span class="company">{job.company}, {job.location}</span>
+                          <span class="date">{job.dates}</span>
+                        </div>
+                        <ul class="timeline-details">
+                          {job.details.map(detail => <li>{detail}</li>)}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {section.id === 'education' && (
+                  <div class="timeline-list">
+                    {section.data.map(edu => (
+                      <div class="timeline-item">
+                        <div class="timeline-header">
+                          <h3>{edu.degree}</h3>
+                          <span class="company">{edu.school}</span>
+                          <span class="date">{edu.dates}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {(section.id === 'certifications' || section.id === 'talks' || section.id === 'awards') && (
+                  <ul class="achievements-list">
+                    {section.data.map(item => {
+                      const icon = section.id === 'certifications' ? 'certificate' : section.id === 'talks' ? 'microphone-stage' : 'trophy';
+                      return (
+                        <li class="achievement-item">
+                          <div class="achievement-icon">
+                            <Icon icon={icon} size="2.5em" />
+                          </div>
+                          <div class="achievement-details">
+                            <strong>{item.title}</strong><br/>
+                            <div class="achievement-meta">
+                                <div class="achievement-meta-text">
+                                    {item.issuer && <span class="issuer">{item.issuer}</span>}
+                                    {item.conference && <span class="issuer">{item.conference}</span>}
+                                    {item.date && <span class="date-text">{item.date}</span>}
+                                </div>
+                                {item.url && (
+                                    <div class="action-button-group">
+                                        <a href={item.url} target="_blank" rel="noopener noreferrer" class="action-button">
+                                            {section.id === 'talks' ? 'Watch' : 'View'}
+                                        </a>
+                                    </div>
+                                )}
+                            </div>
+                            {item.description && <p class="sub-text">{item.description}</p>}
+                          </div>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                )}
+              </div>
+            </section>
+          )
+        })}
+      </div>
+    </main>
+    <ContactCTA />
+  </div>
 </BaseLayout>
 
 <style>
-	.about {
-		display: flex;
-		flex-direction: column;
-		gap: 3.5rem;
-	}
+    .hero-layout {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
 
-	img {
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
+    .roles {
+        display: flex;
+        justify-content: center;
+        margin-top: 0.5rem;
+        gap: 0.5rem;
+    }
 
-	section {
-		display: flex;
-		flex-direction: column;
+    .hero-image {
+        aspect-ratio: 5 / 4;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 1.5rem;
+        box-shadow: var(--shadow-md);
+        width: 100%;
+        max-width: 480px;
+    }
+
+    @media (min-width: 50em) {
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 6fr 4fr;
+            padding-inline: 2.5rem;
+            gap: 3.75rem;
+            align-items: center;
+        }
+
+        .roles {
+            justify-content: flex-start;
+        }
+
+        .hero-image {
+            aspect-ratio: 3 / 4;
+            border-radius: 4.5rem;
+            object-fit: cover;
+            width: 100%;
+            max-width: none;
+        }
+    }
+
+    .download-pill {
+        display: inline-flex;
+        align-items: center;
+		padding: 0.5rem 1rem;
 		gap: 0.5rem;
-		color: var(--gray-200);
-	}
+		color: var(--accent-text-over);
+		border: 1px solid var(--accent-regular);
+		background-color: var(--accent-regular);
+		border-radius: 999rem;
+		font-size: var(--text-md);
+		line-height: 1.35;
+		white-space: nowrap;
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+    }
 
-	.section-title {
-		grid-column-start: 1;
-		font-size: var(--text-xl);
-		color: var(--gray-0);
-	}
+    .download-pill:hover {
+        background-color: var(--accent-dark);
+        border-color: var(--accent-dark);
+        transform: scale(1.05);
+    }
 
-	.content {
-		grid-column: 2 / 4;
-	}
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; 
+    background-color: var(--gray-900);
+    border: 1px solid var(--gray-800);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+  }
 
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
+  @media (min-width: 50em) {
+      .about-content {
+          padding: 3rem;
+      }
+  }
 
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
-	}
+  .content-section {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--gray-800);
+  }
 
-	@media (min-width: 50em) {
-		.about {
-			display: grid;
-			grid-template-columns: 1fr 60% 1fr;
-		}
+  .content-section:last-of-type {
+      border-bottom: none;
+  }
 
-		.about > :global(:first-child) {
-			grid-column-start: 2;
-		}
+  .section-title {
+    font-size: var(--text-2xl);
+    color: var(--gray-0); /* High-contrast color for titles */
+    margin-bottom: 2rem;
+  }
+  
+  .section-content :global(p) {
+    line-height: 1.7;
+    color: var(--gray-300);
+  }
 
-		section {
-			display: contents;
-			font-size: var(--text-lg);
-		}
-	}
-</style>
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-category h4 {
+    font-size: var(--text-lg);
+    color: var(--gray-100);
+    margin-bottom: 1rem;
+  }
+
+  .skill-category ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .skill-category li {
+    background-color: var(--gray-800);
+    color: var(--gray-200);
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+  }
+
+  .timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    border-left: 2px solid var(--gray-800);
+    padding-left: 2rem;
+  }
+
+  .timeline-item {
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.4rem;
+    top: 0.5rem;
+    width: 0.85rem;
+    height: 0.85rem;
+    background-color: var(--accent-regular);
+    border-radius: 50%;
+  }
+
+  .timeline-header h3 {
+    font-size: var(--text-xl);
+    color: var(--gray-0);
+  }
+  .timeline-header .company {
+    display: block; /* Puts company on its own line */
+    color: var(--accent-regular);
+    font-weight: 600;
+    margin-top: 0.25rem;
+  }
+  .timeline-header .date {
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+    margin-top: 0.25rem;
+  }
+
+  .timeline-details {
+    padding-left: 1rem;
+    margin-top: 0.75rem;
+    list-style-type: disc;
+    color: var(--gray-300);
+  }
+
+  .achievements-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .achievement-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .achievement-icon {
+    color: var(--accent-regular);
+    margin-top: 0.25rem; /* Align icon with the first line of text */
+  }
+
+    .achievement-details strong {
+
+      color: var(--gray-100);
+
+      font-size: var(--text-lg);
+
+    }
+
+  
+
+    .achievement-meta {
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        align-items: center;
+
+        gap: 0.5rem 1rem; /* Vertical and horizontal gap */
+
+        margin-top: 0.25rem;
+
+    }
+
+  
+
+        .achievement-meta-text {
+
+  
+
+            display: flex;
+
+  
+
+            flex-direction: column;
+
+  
+
+            align-items: flex-start;
+
+  
+
+            gap: 0;
+
+  
+
+        }
+
+  
+
+    .achievement-details .issuer, .achievement-details .conference {
+        display: block; /* Ensure it's on its own line */
+        color: var(--accent-regular); /* Highlight color */
+        font-weight: 600; /* Bold */
+        margin-top: 0.25rem; /* Consistent spacing */
+    }
+    .achievement-details .date-text {
+        display: block; /* Ensure it's on its own line */
+        color: var(--gray-400); /* Consistent with timeline date */
+        font-size: var(--text-sm); /* Consistent with timeline date */
+        margin-top: 0.25rem; /* Consistent spacing */
+    }
+
+    .action-button-group {
+      margin-top: 1rem; /* Add some space below the date/issuer */
+      /* margin-left: auto; Removed to let it flow normally below */
+    }
+
+              
+
+                .action-button {
+
+                  display: inline-block;
+
+                  padding: 0.3rem 1rem;
+
+                  font-size: var(--text-sm);
+
+                  font-weight: 500;
+
+                  color: var(--gray-200);
+
+                  border: 1px solid var(--gray-700);
+
+                  border-radius: 999rem;
+
+                  text-decoration: none;
+
+                  transition: all 0.2s ease-in-out;
+
+                }
+
+              
+
+                .action-button:hover {
+
+                  background-color: var(--accent-regular);
+
+                  border-color: var(--accent-regular);
+
+                  color: var(--accent-text-over);
+
+                  text-decoration: none;
+
+                }
+
+              </style>

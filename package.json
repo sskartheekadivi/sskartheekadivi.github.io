@@ -6,9 +6,18 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepdf": "mkdir -p fonts && wget -O fonts/RobotoCondensed.zip https://github.com/googlefonts/roboto-3-classic/releases/download/v3.012/Roboto_v3.012.zip && wget -O fonts/SourceSans3.zip https://github.com/adobe-fonts/source-sans/releases/download/3.052R/TTF-source-sans-3.052R.zip && unzip -o fonts/RobotoCondensed.zip -d fonts/RobotoCondensed && unzip -o fonts/SourceSans3.zip -d fonts/SourceSans3 && rm fonts/*.zip",
+    "pdf": "node scripts/generate-resume.js"
   },
   "dependencies": {
-    "astro": "^5.16.0"
+    "astro": "^5.16.0",
+    "puppeteer": "^24.32.0"
+  },
+  "devDependencies": {
+    "@fontsource/roboto-condensed": "^5.2.8",
+    "@fontsource/source-sans-3": "^5.2.9",
+    "gray-matter": "^4.0.3",
+    "pdfmake": "^0.2.21"
   }
 }

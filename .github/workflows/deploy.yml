@@ -1,26 +1,58 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy
 
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'src/content/resume/**'
+      - 'scripts/generate-resume.js'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 jobs:
-  build:
+  build-and-commit-pdf:
+    if: "contains(github.event.head_commit.message, '[skip ci]') == false"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate resume PDF
+        run: npm run pdf
+
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: update resume.pdf [skip ci]"
+          file_pattern: "public/resume.pdf"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+
+  build-and-deploy-site:
+    needs: build-and-commit-pdf
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Install, build, and upload your site
         uses: withastro/action@v2
 
   deploy:
-    needs: build
+    needs: build-and-deploy-site
     runs-on: ubuntu-latest
     environment:
       name: github-pages

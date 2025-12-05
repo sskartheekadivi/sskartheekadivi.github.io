@@ -1,0 +1,113 @@
+---
+/* src/components/TagFilter.astro */
+interface Props {
+	tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<div class="filter-container">
+	<button class="filter-btn active" data-filter="all">All</button>
+	{
+		tags.map((tag) => (
+			<button class="filter-btn" data-filter={tag}>
+				{tag}
+			</button>
+		))
+	}
+</div>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		setupFilter();
+	});
+
+	setupFilter();
+
+	function setupFilter() {
+		const buttons = document.querySelectorAll('.filter-btn');
+		const items = document.querySelectorAll('.filterable-item');
+		const grid = document.querySelector('.grid');
+
+		if (!buttons.length || !items.length) return;
+
+		buttons.forEach((button) => {
+			button.addEventListener('click', () => {
+				// 1. Highlight the active button
+				buttons.forEach((btn) => btn.classList.remove('active'));
+				button.classList.add('active');
+
+				// 2. Get the filter
+				const filter = button.getAttribute('data-filter');
+
+				// 3. Toggle "Manual Mode" on the Grid
+				// If we are filtering, we add 'filtered-active' so CSS waits for our '.shifted' class
+				if (filter === 'all') {
+					grid?.classList.remove('filtered-active');
+				} else {
+					grid?.classList.add('filtered-active');
+				}
+
+				// 4. Loop through items and recalculate layout
+				let visibleIndex = 0;
+
+				items.forEach((item) => {
+					const el = item as HTMLElement;
+					const itemTags = el.dataset.tags || '';
+					const isVisible = filter === 'all' || itemTags.includes(filter!);
+
+					if (isVisible) {
+						el.style.display = ''; // Show it
+
+						// ZIGZAG LOGIC:
+						// If this is the 1st, 3rd, 5th (Odd) visible item...
+						// (Index 0 is the 1st item)
+						if (visibleIndex % 2 !== 0) {
+							el.classList.add('shifted');
+						} else {
+							el.classList.remove('shifted');
+						}
+
+						visibleIndex++;
+					} else {
+						el.style.display = 'none'; // Hide it
+						el.classList.remove('shifted');
+					}
+				});
+			});
+		});
+	}
+</script>
+
+<style>
+	.filter-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 2rem;
+		justify-content: center; /* Center buttons */
+	}
+
+	.filter-btn {
+		background-color: var(--gray-999);
+		border: 1px solid var(--gray-800);
+		border-radius: 999px;
+		padding: 0.5rem 1rem;
+		color: var(--gray-200);
+		font-size: var(--text-sm);
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.filter-btn:hover {
+		border-color: var(--accent-regular);
+		color: var(--gray-0);
+	}
+
+	.filter-btn.active {
+		background-color: var(--accent-regular);
+		color: white;
+		border-color: var(--accent-regular);
+	}
+</style>

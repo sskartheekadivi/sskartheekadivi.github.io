@@ -1,0 +1,305 @@
+---
+import { getCollection } from 'astro:content';
+
+const resumeEntries = await getCollection('resume');
+const resumeEntry = resumeEntries[0];
+const { data: resume } = resumeEntry;
+const { Content } = await resumeEntry.render();
+
+const orderedSections = [
+  { id: 'summary', title: 'Summary', data: null, component: Content },
+  { id: 'skills', title: 'Technical Skills', data: resume.skills },
+  { id: 'experience', title: 'Experience', data: resume.experience },
+  { id: 'education', title: 'Education', data: resume.education },
+  { id: 'certifications', title: 'Certifications', data: resume.certifications },
+  { id: 'talks', title: 'Talks & Publications', data: resume.talks },
+  { id: 'awards', title: 'Awards', data: resume.awards },
+];
+
+const printStyles = `
+  :root {
+    /* Color Palette - Modern Navy & Blue */
+    --primary: #0f172a;       /* Dark Slate - Main Text */
+    --accent: #2563eb;        /* Royal Blue - Highlights */
+    --accent-bg: #eff6ff;     /* Very Light Blue - Section Backgrounds */
+    --secondary: #64748b;     /* Slate Gray - Meta info */
+    --border: #e2e8f0;        /* Light Gray - Dividers */
+  }
+
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    color: var(--primary);
+    background: #fff;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4 {
+    font-family: 'Roboto Condensed', sans-serif;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  
+  li {
+    margin-bottom: 0.25em;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 2em;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 1.5em;
+  }
+
+  h1 {
+    font-size: 32pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary);
+    margin-bottom: 0.1em;
+  }
+
+  .tagline {
+    font-size: 11pt;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.8em;
+    text-transform: uppercase;
+  }
+
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+    font-size: 9.5pt;
+    color: var(--secondary);
+  }
+
+  .contact-info span {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Section Styling */
+  section {
+    margin-bottom: 1.8em;
+  }
+
+  /* The styled H2 is the biggest visual change */
+  h2 {
+    font-size: 14pt;
+    text-transform: uppercase;
+    color: var(--primary);
+    background-color: var(--accent-bg);
+    border-left: 5px solid var(--accent);
+    padding: 0.3em 0.6em;
+    margin-bottom: 1em;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Content Items */
+  .item {
+    margin-bottom: 1.2em;
+    page-break-inside: avoid;
+  }
+
+  .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 0.2em;
+    margin-bottom: 0.4em;
+  }
+
+  .item-header h3 {
+    font-size: 12pt;
+    color: var(--primary);
+  }
+
+  .date {
+    font-size: 9pt;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    background: #fff;
+    padding-left: 0.5em;
+  }
+
+  .item-subheader {
+    font-size: 10pt;
+    color: var(--secondary);
+    margin-bottom: 0.5em;
+    font-style: italic;
+  }
+  
+  .item-subheader strong {
+    color: var(--primary);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* Skills Grid */
+  .skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .skill-category {
+    width: 140px;
+    flex-shrink: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 10pt;
+    text-transform: uppercase;
+  }
+
+  .skill-list {
+    flex-grow: 1;
+    color: var(--secondary);
+    font-weight: 400;
+  }
+  
+  /* Summary Text */
+  .summary-content {
+    color: var(--secondary);
+    text-align: justify;
+    line-height: 1.6;
+  }
+`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <title>{resume.name} - Resume</title>
+    <style>{printStyles}</style>
+</head>
+<body>
+    <div class="resume-container">
+        
+        <header>
+            <h1>{resume.name}</h1>
+            <div class="tagline">{resume.tagline}</div>
+            
+            <div class="contact-info">
+                {resume.email && <span>{resume.email}</span>}
+                {resume.phone && <span>| &nbsp; {resume.phone}</span>}
+                {resume.website && <span>| &nbsp; <a href={`https://${resume.website}`} target="_blank">{resume.website}</a></span>}
+                {resume.linkedin && <span>| &nbsp; <a href={`https://${resume.linkedin}`} target="_blank">LinkedIn</a></span>}
+            </div>
+        </header>
+
+        {orderedSections.map(section => {
+          if (!section.data && !section.component) return null;
+          if (Array.isArray(section.data) && section.data.length === 0) return null;
+
+          return (
+            <section id={section.id}>
+              <h2>{section.title}</h2>
+              
+              <div class="section-content">
+                
+                {/* 1. SUMMARY */}
+                {section.id === 'summary' && (
+                    <div class="summary-content">
+                        <section.component />
+                    </div>
+                )}
+                
+                {/* 2. SKILLS */}
+                {section.id === 'skills' && (
+                  <div class="skills-container">
+                    {Object.entries(section.data).map(([category, skills]) => (
+                      <div class="skill-row">
+                        <span class="skill-category">{category}</span>
+                        <span class="skill-list">{skills.join(', ')}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* 3. EXPERIENCE & EDUCATION */}
+                {(section.id === 'experience' || section.id === 'education') && (
+                    <div>
+                        {section.data.map(item => (
+                            <div class="item">
+                                <div class="item-header">
+                                    <h3>{item.role || item.degree}</h3>
+                                    <span class="date">{item.dates}</span>
+                                </div>
+                                <div class="item-subheader">
+                                    <strong>{item.company || item.school}</strong>
+                                    {item.location ? ` — ${item.location}` : ''}
+                                </div>
+                                {item.details && (
+                                    <ul class="item-details">
+                                        {item.details.map(detail => <li>{detail}</li>)}
+                                    </ul>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* 4. OTHER LISTS */}
+                {(section.id === 'certifications' || section.id === 'talks' || section.id === 'awards') && (
+                    <div>
+                        {section.data.map(item => (
+                            <div class="item">
+                                <div class="item-header">
+                                    <h3>{item.title}</h3>
+                                    <span class="date">{item.date}</span>
+                                </div>
+                                <div class="item-subheader">
+                                    <strong>{item.issuer || item.conference}</strong>
+                                    {item.url && <span> — <a href={item.url} target="_blank">View Link</a></span>}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+              </div>
+            </section>
+          )
+        })}
+    </div>
+</body>
+</html>
