@@ -3,10 +3,6 @@ name: Build and Deploy
 on:
   push:
     branches: [ master ]
-    paths:
-      - 'src/content/resume/**'
-      - 'scripts/generate-resume.js'
-      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 permissions:
@@ -21,19 +17,38 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get changed files
+        id: changed-files
+        run: |
+          echo "changed-files=$(git diff-tree --no-commit-id --name-only -r HEAD | xargs)" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
+        if: |
+          contains(steps.changed-files.outputs.changed-files, 'src/content/resume/') ||
+          contains(steps.changed-files.outputs.changed-files, 'scripts/generate-resume.js')
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Install dependencies
+        if: |
+          contains(steps.changed-files.outputs.changed-files, 'src/content/resume/') ||
+          contains(steps.changed-files.outputs.changed-files, 'scripts/generate-resume.js')
         run: npm install
 
       - name: Generate resume PDF
+        if: |
+          contains(steps.changed-files.outputs.changed-files, 'src/content/resume/') ||
+          contains(steps.changed-files.outputs.changed-files, 'scripts/generate-resume.js')
         run: npm run pdf
 
       - name: Commit and push if changed
+        if: |
+          contains(steps.changed-files.outputs.changed-files, 'src/content/resume/') ||
+          contains(steps.changed-files.outputs.changed-files, 'scripts/generate-resume.js')
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "docs: update resume.pdf [skip ci]"
@@ -45,8 +60,15 @@ jobs:
     needs: build-and-commit-pdf
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout latest master
         uses: actions/checkout@v4
+        with:
+          ref: 'master'
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Install, build, and upload your site
         uses: withastro/action@v2
