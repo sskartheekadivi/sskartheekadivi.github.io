@@ -200,263 +200,29 @@ const orderedSections = [
             width: 100%;
             max-width: none;
         }
-    }
 
-    .download-pill {
-        display: inline-flex;
-        align-items: center;
-		padding: 0.5rem 1rem;
-		gap: 0.5rem;
-		color: var(--accent-text-over);
-		border: 1px solid var(--accent-regular);
-		background-color: var(--accent-regular);
-		border-radius: 999rem;
-		font-size: var(--text-md);
-		line-height: 1.35;
-		white-space: nowrap;
-        text-decoration: none;
-        transition: all 0.2s ease-in-out;
-    }
-
-    .download-pill:hover {
-        background-color: var(--accent-dark);
-        border-color: var(--accent-dark);
-        transform: scale(1.05);
-    }
-
-  .about-content {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem; 
-    background-color: var(--gray-900);
-    border: 1px solid var(--gray-800);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    box-shadow: var(--shadow-lg);
-  }
-
-  @media (min-width: 50em) {
-      .about-content {
+        .about-content {
           padding: 3rem;
-      }
-  }
-
-  .content-section {
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--gray-800);
-  }
-
-  .content-section:last-of-type {
-      border-bottom: none;
-  }
-
-  .section-title {
-    font-size: var(--text-2xl);
-    color: var(--gray-0); /* High-contrast color for titles */
-    margin-bottom: 2rem;
-  }
-  
-  .section-content :global(p) {
-    line-height: 1.7;
-    color: var(--gray-300);
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-  }
-
-  .skill-category h4 {
-    font-size: var(--text-lg);
-    color: var(--gray-100);
-    margin-bottom: 1rem;
-  }
-
-  .skill-category ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .skill-category li {
-    background-color: var(--gray-800);
-    color: var(--gray-200);
-    padding: 0.4rem 1rem;
-    border-radius: 6px;
-  }
-
-  .timeline-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    border-left: 2px solid var(--gray-800);
-    padding-left: 2rem;
-  }
-
-  .timeline-item {
-    position: relative;
-  }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -2.4rem;
-    top: 0.5rem;
-    width: 0.85rem;
-    height: 0.85rem;
-    background-color: var(--accent-regular);
-    border-radius: 50%;
-  }
-
-  .timeline-header h3 {
-    font-size: var(--text-xl);
-    color: var(--gray-0);
-  }
-  .timeline-header .company {
-    display: block; /* Puts company on its own line */
-    color: var(--accent-regular);
-    font-weight: 600;
-    margin-top: 0.25rem;
-  }
-  .timeline-header .date {
-    font-size: var(--text-sm);
-    color: var(--gray-400);
-    margin-top: 0.25rem;
-  }
-
-  .timeline-details {
-    padding-left: 1rem;
-    margin-top: 0.75rem;
-    list-style-type: disc;
-    color: var(--gray-300);
-  }
-
-  .achievements-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .achievement-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-  }
-  
-  .achievement-icon {
-    color: var(--accent-regular);
-    margin-top: 0.25rem; /* Align icon with the first line of text */
-  }
-
-    .achievement-details strong {
-
-      color: var(--gray-100);
-
-      font-size: var(--text-lg);
-
-    }
-
-  
-
-    .achievement-meta {
-
-        display: flex;
-
-        flex-wrap: wrap;
-
-        align-items: center;
-
-        gap: 0.5rem 1rem; /* Vertical and horizontal gap */
-
-        margin-top: 0.25rem;
-
-    }
-
-  
-
-        .achievement-meta-text {
-
-  
-
-            display: flex;
-
-  
-
-            flex-direction: column;
-
-  
-
-            align-items: flex-start;
-
-  
-
-            gap: 0;
-
-  
-
         }
-
-  
-
-    .achievement-details .issuer, .achievement-details .conference {
-        display: block; /* Ensure it's on its own line */
-        color: var(--accent-regular); /* Highlight color */
-        font-weight: 600; /* Bold */
-        margin-top: 0.25rem; /* Consistent spacing */
     }
-    .achievement-details .date-text {
-        display: block; /* Ensure it's on its own line */
-        color: var(--gray-400); /* Consistent with timeline date */
-        font-size: var(--text-sm); /* Consistent with timeline date */
-        margin-top: 0.25rem; /* Consistent spacing */
+</style>
+<style>
+    @media (max-width: 50em) {
+        .hero-layout {
+            display: flex;
+            flex-direction: column;
+        }
+        .about-content {
+            padding: 1.5rem;
+        }
+        .skills-grid {
+            grid-template-columns: 1fr;
+        }
+        .timeline-list {
+            padding-left: 1rem;
+        }
+        .timeline-item::before {
+            left: -1.4rem;
+        }
     }
-
-    .action-button-group {
-      margin-top: 1rem; /* Add some space below the date/issuer */
-      /* margin-left: auto; Removed to let it flow normally below */
-    }
-
-              
-
-                .action-button {
-
-                  display: inline-block;
-
-                  padding: 0.3rem 1rem;
-
-                  font-size: var(--text-sm);
-
-                  font-weight: 500;
-
-                  color: var(--gray-200);
-
-                  border: 1px solid var(--gray-700);
-
-                  border-radius: 999rem;
-
-                  text-decoration: none;
-
-                  transition: all 0.2s ease-in-out;
-
-                }
-
-              
-
-                .action-button:hover {
-
-                  background-color: var(--accent-regular);
-
-                  border-color: var(--accent-regular);
-
-                  color: var(--accent-text-over);
-
-                  text-decoration: none;
-
-                }
-
-              </style>
+</style>

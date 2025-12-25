@@ -44,11 +44,9 @@ const { Content } = await render(entry);
 				</div>
 			</header>
 			<main class="wrapper">
-				<div class="stack gap-10 content">
+				<div class="content">
 					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
-					<div class="content">
-						<Content />
-					</div>
+					<Content />
 				</div>
 			</main>
 		</div>
@@ -74,13 +72,24 @@ const { Content } = await render(entry);
 		flex-direction: column;
 		padding: 0.5rem;
 		gap: 1.5rem;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
+		text-align: center;
 	}
 
 	.tags {
 		display: flex;
 		gap: 0.5rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.tags :global(.pill) {
+		font-size: var(--text-sm);
+		padding: 0.2rem 0.6rem;
+		background-color: var(--gray-800);
+		border-color: var(--gray-700);
+		color: var(--gray-200);
 	}
 
 	.description {
@@ -89,8 +98,12 @@ const { Content } = await render(entry);
 	}
 
 	.content {
-		max-width: 65ch;
+		max-width: 83rem;
 		margin-inline: auto;
+	}
+
+	.content > :global(img:first-child) {
+		margin-bottom: 2.5rem;
 	}
 
 	.content > :global(* + *) {
@@ -106,6 +119,11 @@ const { Content } = await render(entry);
 	}
 
 	.content :global(img) {
+		max-width: 100%;
+		height: auto;
+		display: block;
+		margin-inline: auto;
+		margin-block: 2rem;
 		border-radius: 1.5rem;
 		box-shadow: var(--shadow-sm);
 		background: var(--gradient-subtle);
@@ -145,10 +163,16 @@ const { Content } = await render(entry);
 		.details {
 			flex-direction: row;
 			gap: 2.5rem;
+			justify-content: space-between;
+			text-align: left;
 		}
 
 		.content :global(blockquote) {
 			font-size: var(--text-2xl);
+		}
+		
+		.content :global(img) {
+			max-width: 70%;
 		}
 	}
 </style>

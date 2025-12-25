@@ -90,7 +90,17 @@ const projects = (await getCollection('projects'))
 	}
 
 	.roles {
-		display: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.roles :global(.pill) {
+		font-size: var(--text-sm);
+		padding: 0.2rem 0.6rem;
+		background-color: var(--gray-800);
+		border-color: var(--gray-700);
+		color: var(--gray-200);
 	}
 
 	.hero img {
@@ -111,8 +121,6 @@ const projects = (await getCollection('projects'))
 
 		.roles {
 			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
 		}
 
 		.hero img {

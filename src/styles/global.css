@@ -52,15 +52,15 @@
     0px 16px 16px rgba(9, 11, 17, 0.1), 0px 4px 9px rgba(9, 11, 17, 0.12);
 
   /* Text Sizes */
-  --text-sm: 0.875rem;
+  --text-sm: 0.8rem;
   --text-base: 1rem;
   --text-md: 1.125rem;
   --text-lg: 1.25rem;
-  --text-xl: 1.625rem;
-  --text-2xl: 2.125rem;
-  --text-3xl: 2.625rem;
-  --text-4xl: 3.5rem;
-  --text-5xl: 4.5rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  --text-5xl: 4rem;
 
   /* Fonts */
   --font-system:
@@ -71,6 +71,20 @@
 
   /* Transitions */
   --theme-transition: 0.2s ease-in-out;
+}
+
+@media (min-width: 50em) {
+  :root {
+    --text-sm: 0.875rem;
+    --text-base: 1.1rem;
+    --text-md: 1.25rem;
+    --text-lg: 1.5rem;
+    --text-xl: 1.75rem;
+    --text-2xl: 2.25rem;
+    --text-3xl: 3rem;
+    --text-4xl: 4rem;
+    --text-5xl: 5rem;
+  }
 }
 
 :root.theme-dark {
@@ -195,6 +209,32 @@ pre {
   margin-bottom: 2rem;
 }
 
+/* Table styling for better readability */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 2rem; /* Add vertical spacing around tables */
+  font-size: var(--text-base);
+}
+
+th,
+td {
+  border: 1px solid var(--gray-700);
+  padding: 0.75rem 1rem; /* Added left and right padding */
+  text-align: left;
+  color: var(--gray-200);
+}
+
+th {
+  background-color: var(--gray-800);
+  font-weight: 600;
+  color: var(--gray-0);
+}
+
+tr:nth-child(even) {
+  background-color: var(--gray-900);
+}
+
 /* Optional: Make the code font consistent */
 code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -290,5 +330,13 @@ code {
 
   .lg\:gap-48 {
     gap: 12rem;
+  }
+}
+
+@media (max-width: 50em) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap; /* Prevent line breaks within cells */
   }
 }
